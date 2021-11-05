@@ -1,0 +1,21 @@
+.col-md-4 {
+    flex: 0 0 auto;
+    width: auto;
+}
+.img-thumbnail{
+    width:200px;
+    height: 300px;
+    cursor: pointer;
+}
+.container{
+    padding-top:50px;
+    padding-left: 60px;
+}
+.ImageTitle{
+    font-size: 20px;
+    color: #1e1e1e;
+    padding-left: 7px;
+}
+.footer-elements{
+    padding:8px;
+}

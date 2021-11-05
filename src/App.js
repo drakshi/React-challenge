@@ -1,23 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Content from './components/Content';
+import Footer from './components/Footer';
+import { useState } from 'react';
+import Series from './components/Series';
+import Movies from './components/Movies';
 
 function App() {
+  const[showSeriesTab , setShowSeriesTab] = useState(false);
+  const[showMoviesTab, setShowMoviesTab] = useState(false);
+  const[series , setSeries] = useState([]);
+
+  const showSeriesTabHandler = () => {
+    setShowSeriesTab(true);
+  }
+
+  const showMoviesTabHandler = () => {
+    setShowMoviesTab(true);
+  }
+ 
+  fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json').then(response => {
+    return response.json();
+  }).then((data) => {
+    setSeries(data.entries);
+  });
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+       {showSeriesTab && <Series series={series}/>}
+       {showMoviesTab && <Movies />}
+       {!showSeriesTab && !showMoviesTab &&<Header title="Titles"/>}
+       {!showSeriesTab && !showMoviesTab && <Content onShowSeries = {showSeriesTabHandler} onShowMovies = {showMoviesTabHandler}/>}
+       {!showSeriesTab && !showMoviesTab && <Footer />}
     </div>
   );
 }
